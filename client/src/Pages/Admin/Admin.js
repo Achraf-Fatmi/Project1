@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import RowDetails from '../../Componentes/RowDetails'
+import { GetProfiles } from '../../redux/actions/profileActions'
 
 function Admin() {
+  const dispatch= useDispatch()
+
+  const profiles = useSelector(state=> state.profiles)
+
+  useEffect (()=>{
+    async function fetchProfiles(){
+    await dispatch (GetProfiles())
+    }
+    fetchProfiles()
+   
+  },[])
+
+
   return (
 <div className="bg-light" style={{height: '100vh'}}>
         {/* form */}
@@ -15,6 +31,7 @@ function Admin() {
                   <thead>
                     <tr>
                       <th scope="col">name</th>
+                      <th scope="col">ID</th>
                       <th scope="col">email</th>
                       <th scope="col">role</th>
                       <th scope="col">phone</th>
@@ -23,14 +40,13 @@ function Admin() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th>youssef</th>
-                      <td>test@live.fr</td>
-                      <td>ADMIN</td>
-                      <td>56666666</td>
-                      <td>bad player</td>
-                      <td><button className="btn btn-outline-danger">Delete</button></td>
-                    </tr>
+                    {
+                      profiles.profiles.map(({_id, user, phone , description})=>(
+                        <RowDetails _id={_id} user={user} phone={phone} description={description} />
+                        
+                      ))
+                    }
+                    
                   </tbody>
                 </table>
               </div>

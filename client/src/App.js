@@ -1,4 +1,4 @@
-
+import React , {useEffect} from "react"
 import './App.css';
 import {
   BrowserRouter,
@@ -17,15 +17,41 @@ import NoAccess from './Pages/NoAccess';
 import PrivateRouter from './Componentes/PrivateRouter';
 import AdminRouter from './Componentes/AdminRouter';
 import ForceRedirect from './Componentes/ForceRedirect';
-function App() {
-  const user = {
-    isConnected : false,
-    role : "ADMIN"
+import { Logout, setUser } from './redux/actions/authActions';
+import store from './redux/store'
+import jwt_decode from 'jwt-decode'
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuth } from './utilities/setAuth';
+import { GetProfile } from './redux/actions/profileActions';
+
+if (window.localStorage.jwt){
+  const decode = jwt_decode(window.localStorage.jwt)
+  store.dispatch(setUser(decode))
+  setAuth(window.localStorage.jwt)
+  const currentDate= Date.now / 1000
+
+  if (decode.exp > currentDate){
+    store.dispatch(Logout())
   }
+}
+
+
+
+function App() {
+  const dispatch = useDispatch()
+  const auth = useSelector(state=> state.auth)
+  const user = {
+    isConnected : auth.isConnected,
+    role : auth.user.role
+  }
+  useEffect(()=>{
+    dispatch(GetProfile())
+  }, [])
   return (
     <div className="App">
 
       <BrowserRouter>
+      <div>
       <CompNavbar user={user}/>
     <Routes>
           <Route path="/" element={<Home />}/>
@@ -49,6 +75,7 @@ function App() {
           <Route path ="/noaccess" element={<NoAccess />} />
  
     </Routes>
+    </div>
   </BrowserRouter>,
     </div>
   );

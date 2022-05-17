@@ -3,11 +3,12 @@ require('dotenv').config ({path:"./Config/.env"})
 const passport = require ('passport')
 
 const connectDB= require ('./Config/connectDB')
+const app = express ();
 var cors=require ('cors')
 app.use (cors())
 connectDB()
 
-const app = express ();
+
 app.use (express.json())
 
 

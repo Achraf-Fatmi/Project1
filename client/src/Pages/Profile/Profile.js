@@ -1,7 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import Inputs from '../../Componentes/Inputs'
+import { AddProfile, GetProfile } from '../../redux/actions/profileActions';
+
 
 function Profile() {
+  const [form, setForm] = useState({phone:""});
+  const dispatch = useDispatch();
+  const errors = useSelector((state) => state.errors);
+  const profiles = useSelector((state) => state.profiles.profile);
+  console.log(profiles)
+  const onChangeHandler = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(AddProfile(form));
+  };
+
+  useEffect(()=>{
+    profiles? setForm(profiles):  setForm({phone:""})
+    }, [profiles])
   return (
   
     <div className="container">
@@ -13,9 +35,9 @@ function Profile() {
               <div className="d-flex flex-column align-items-center text-center">
                 <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" className="rounded-circle p-1 bg-primary" width={110} />
                 <div className="mt-3">
-                  <h4>John Doe</h4>
-                  <p className="text-secondary mb-1">Full Stack Developer</p>
-                  <p className="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                  <h4>Sami</h4>
+                  <p className="text-secondary mb-1">League Player</p>
+                  <p className="text-muted font-size-sm"></p>
 
                 </div>
               </div>
@@ -47,29 +69,34 @@ function Profile() {
         </div>
         <div className="col-lg-8">
           <div className="card">
+            <form onSubmit={onSubmit} >
             <div className="card-body">
               <div className="row mb-3">
-              <Inputs name="phone" label="Phone" type="text"/>
+              <Inputs name="phone"  label="Phone"  value={form.phone} type="text" onChangeHandler={onChangeHandler} errors={errors.phone}/>
               </div>
               <div className="row mb-3">
-              <Inputs name="discord" label="Discord" type="text"/>
+              <Inputs name="discord"  label="Discord" value={form && form.discord? form.discord: ""} type="text" onChangeHandler={onChangeHandler} errors={errors.discord}/>
               </div>
               <div className="row mb-3">
-              <Inputs name="currentRank" label="Current Rank" type="text"/>
+              <Inputs name="currentRank"  label="Current Rank"  value={form && form.currentRank? form.currentRank: ""} type="text" onChangeHandler={onChangeHandler} errors={errors.currentRank}/>
               </div>
               <div className="row mb-3">
-              <Inputs name="highestRank" label="Highest Rank" type="text"/>
+              <Inputs name="highestRank"  label="Highest Rank" value={form && form.highestRank? form.highestRank: ""} type="text" onChangeHandler={onChangeHandler} errors={errors.highestRank}/>
               </div>
               <div className="row mb-3">
-              <Inputs name="youtube_channel" label="Youtube Channel" type="text"/>
+              <Inputs name="youtube_channel"  label="Youtube Channel" value={form && form.youtube_channel? form.youtube_channel: ""} type="text" onChangeHandler={onChangeHandler} errors={errors.youtube_channel}/>
+              </div>
+              <div className="row mb-3">
+              <Inputs name="description"  label="Description" value={form && form.description? form.description: ""} type="text" onChangeHandler={onChangeHandler} errors={errors.description}/>
               </div>
               <div className="row">
                 <div className="col-sm-3" />
                 <div className="col-sm-9 text-secondary">
-                  <input type="button" className="btn btn-primary px-4" defaultValue="Save Changes" />
+                  <button type="submit" className="btn btn-primary px-4" defaultValue="Save Changes">Save Changes</button>
                 </div>
               </div>
             </div>
+            </form>
           </div>
 
         </div>

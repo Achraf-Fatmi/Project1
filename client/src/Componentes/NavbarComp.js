@@ -1,8 +1,16 @@
 import React from 'react'
 import {  Navbar, Nav, NavDropdown,Container, Form, Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Logout } from '../redux/actions/authActions'
+import { GetProfile } from '../redux/actions/profileActions'
 
 function CompNavbar ({user}) {
+  const dispatch = useDispatch()
+  const LogoutHandler =() => {
+    dispatch(Logout())
+  }
+
   return (
     <Navbar bg="light" expand="lg" >
   <Container fluid style={{marginBottom:'40px'}}>
@@ -21,8 +29,11 @@ function CompNavbar ({user}) {
         <Nav.Link >
         <Link to="/">Home</Link>
           </Nav.Link>
-        <Nav.Link>
-          <Link to="/profile"> Profile</Link>
+        {
+          user.isConnected=== true?(
+          <>
+          <Nav.Link>
+          <Link to="/profile" onClick={()=>dispatch(GetProfile())}> Profile</Link>
           </Nav.Link>
         <NavDropdown title="More" id="navbarScrollingDropdown">
           <NavDropdown.Item>
@@ -33,6 +44,16 @@ function CompNavbar ({user}) {
           </NavDropdown.Item>
 
         </NavDropdown>
+        </>
+        ): ''
+        }
+        {
+          user.role=== "ADMIN"?(
+            <Nav.Link>
+            <Link to="/admin"> Manage Users</Link>
+            </Nav.Link>
+          ): ""
+        }
 
       </Nav>
       
@@ -44,7 +65,21 @@ function CompNavbar ({user}) {
              {user.role}
             </Form.Label>) : ''
         }
-        <Button variant="outline-success">Logout</Button>
+
+        {
+          !user.isConnected? (
+            <>
+         <Link to='/register'>
+           <Button variant="outline-success" style={{margin:'3px'}}>Register</Button>
+           </Link>
+        <Link to='/login'> 
+        <Button variant="outline-success"style={{margin:'3px'}}>Login</Button>
+        </Link>
+            </>
+          ):(
+            <Link to='/#' onClick={LogoutHandler}> <Button variant="outline-success"style={{margin:'3px'}}>Logout</Button></Link>
+          )
+        }
       </Form>
     </Navbar.Collapse>
   </Container>

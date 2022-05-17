@@ -8,7 +8,7 @@ const ProfileModel = new Schema ({
         ref:"users",
         required: true
     },
-    phone: {type: Number}, 
+    phone: {type: String}, 
     discord: {type: String},
     currentRank:{type:String},
     highestRank:{type: String},

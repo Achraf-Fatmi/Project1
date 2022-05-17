@@ -61,7 +61,7 @@ try {
                          }, process.env.PRIVATE_KEY, { expiresIn:'24h'});
                         res.status(200).json({
                             message:"success",
-                            token: token
+                            token: "Bearer "+ token
                         })
                     }
                 })

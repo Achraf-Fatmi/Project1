@@ -4,10 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js --ignore client",
-    "client": "npm start --prefix client",
-    "start:dev": "concurrently \"npm run server\" \"npm run client\""
-  },
+    "back": "nodemon server.js",
+    "client": "cd client && npm start",
+    "start": "concurrently \"npm run back\" \"npm run client\""  },
   "keywords": [],
   "author": "",
   "license": "ISC",
