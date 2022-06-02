@@ -37,7 +37,7 @@ function CompNavbar ({user}) {
           </Nav.Link>
         <NavDropdown title="More" id="navbarScrollingDropdown">
           <NavDropdown.Item>
-          <Link to="/coahces" >Coaches</Link> 
+          <Link to="/coaches" >Coaches</Link> 
             </NavDropdown.Item>
           <NavDropdown.Item >
             <Link to="/users" >Users</Link> 

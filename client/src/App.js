@@ -23,6 +23,8 @@ import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from './utilities/setAuth';
 import { GetProfile } from './redux/actions/profileActions';
+import Users from "./Pages/Users/Users";
+import Coaches from "./Pages/Coaches/Coaches";
 
 if (window.localStorage.jwt){
   const decode = jwt_decode(window.localStorage.jwt)
@@ -44,9 +46,16 @@ function App() {
     isConnected : auth.isConnected,
     role : auth.user.role
   }
-  useEffect(()=>{
-    dispatch(GetProfile())
-  }, [])
+  const profile=useSelector((state)=>state.profiles)
+   console.log(profile.profile)
+  
+    useEffect(()=>{
+      if(profile.profile){
+      dispatch(GetProfile())
+      }
+    }, [])
+  
+  
   return (
     <div className="App">
 
@@ -55,6 +64,8 @@ function App() {
       <CompNavbar user={user}/>
     <Routes>
           <Route path="/" element={<Home />}/>
+          <Route path="/users" element = {<Users />} />
+          <Route path="/coaches" element = {<Coaches/>} />
           <Route path="/login" element={
           <ForceRedirect user={user}>
           <Login />

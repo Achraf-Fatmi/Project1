@@ -5,11 +5,13 @@ import { AddProfile, GetProfile } from '../../redux/actions/profileActions';
 
 
 function Profile() {
-  const [form, setForm] = useState({phone:""});
+  const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.errors);
   const profiles = useSelector((state) => state.profiles.profile);
-  console.log(profiles)
+  const auth = useSelector ((state)=>state.auth)
+  console.log(auth)
+
   const onChangeHandler = (e) => {
     setForm({
       ...form,
@@ -20,10 +22,12 @@ function Profile() {
     e.preventDefault();
     dispatch(AddProfile(form));
   };
+  
 
   useEffect(()=>{
-    profiles? setForm(profiles):  setForm({phone:""})
+    profiles? setForm(profiles):  setForm({})
     }, [profiles])
+    
   return (
   
     <div className="container">
@@ -35,8 +39,8 @@ function Profile() {
               <div className="d-flex flex-column align-items-center text-center">
                 <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" className="rounded-circle p-1 bg-primary" width={110} />
                 <div className="mt-3">
-                  <h4>Sami</h4>
-                  <p className="text-secondary mb-1">League Player</p>
+                  <h4>{auth.user.name}</h4>
+                  <p className="text-secondary mb-1">{auth.user.role}</p>
                   <p className="text-muted font-size-sm"></p>
 
                 </div>
