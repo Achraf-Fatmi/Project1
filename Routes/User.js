@@ -1,6 +1,6 @@
 const express = require ('express');
 const passport =require('passport');
-const { AddProfile, FindAllProfiles, FindOneProfile, DeleteProfile } = require('../Controllers/profileControllers');
+const { AddProfile, FindAllProfiles, FindOneProfile, DeleteProfile, getProfileByID } = require('../Controllers/profileControllers');
 
 
 const {userRegister, Login, Test, Admin, Coach} = require ('../Controllers/userController');
@@ -21,6 +21,8 @@ router.post('/profiles',passport.authenticate('jwt', { session: false }), AddPro
 router.get('/profiles',passport.authenticate('jwt', { session: false }), FindAllProfiles);
 
 router.get('/profile',passport.authenticate('jwt', { session: false }), FindOneProfile);
+
+router.get('/profile/:id',passport.authenticate('jwt', { session: false }), getProfileByID);
 
 router.delete('/profiles/:id',passport.authenticate('jwt', { session: false }),
 isRole(Roles.ADMIN),

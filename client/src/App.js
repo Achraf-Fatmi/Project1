@@ -4,6 +4,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  useParams
 } from "react-router-dom";
 
 import CompNavbar from './Componentes/NavbarComp';
@@ -22,9 +23,10 @@ import store from './redux/store'
 import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from './utilities/setAuth';
-import { GetProfile } from './redux/actions/profileActions';
+import { GetProfile , getProfileById } from './redux/actions/profileActions';
 import Users from "./Pages/Users/Users";
 import Coaches from "./Pages/Coaches/Coaches";
+import VisitProfile from "./Pages/VisitProfile/VisitProfile";
 
 if (window.localStorage.jwt){
   const decode = jwt_decode(window.localStorage.jwt)
@@ -48,12 +50,15 @@ function App() {
   }
   const profile=useSelector((state)=>state.profiles)
    console.log(profile.profile)
-  
+
+
+
     useEffect(()=>{
       if(profile.profile){
       dispatch(GetProfile())
       }
     }, [])
+
   
   
   return (
@@ -66,6 +71,7 @@ function App() {
           <Route path="/" element={<Home />}/>
           <Route path="/users" element = {<Users />} />
           <Route path="/coaches" element = {<Coaches/>} />
+          <Route path="/visitprofile" element={<VisitProfile/>}/>
           <Route path="/login" element={
           <ForceRedirect user={user}>
           <Login />
@@ -82,6 +88,7 @@ function App() {
           <Admin />
           </AdminRouter>
         } />
+        
           <Route path ="*" element={<NotFound />} />
           <Route path ="/noaccess" element={<NoAccess />} />
  

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import Inputs from '../../Componentes/Inputs'
 import { Registration } from '../../redux/actions/authActions'
+import './Register.css'
 function Register() {
   const [form,setForm]= useState({})
   const dispatch=useDispatch()
@@ -20,6 +21,7 @@ function Register() {
     dispatch(Registration(form, navigate))
   }
   return (
+  <div className='RegisterContainer'>
 <Form onSubmit={onSubmit} style={{marginLeft: "20%" , marginRight:"20%"}}>
 
     <Inputs name="name" label="Name" type="text" onChangeHandler={onChangeHandler} errors={errors.name}/>
@@ -36,6 +38,7 @@ function Register() {
       Sign up
     </Button>
   </Form>
+  </div>
   )
 }
 

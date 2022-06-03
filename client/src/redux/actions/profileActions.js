@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ERRORS, SET_PROFILE, SET_PROFILES,DELETE_PROFILE } from "../types"
+import { ERRORS, SET_PROFILE, SET_PROFILES,DELETE_PROFILE, GET_PROFILE } from "../types"
 
 export const AddProfile = (form) =>dispatch=>{
     axios
@@ -52,6 +52,25 @@ export const GetProfiles = () =>dispatch=>{
     })
 
 }
+export const getProfileById = (id) => async (dispatch) => {
+    try {
+      const res = await axios.get(`/api/profile/${id}`);
+      console.log("rs=es : ",res.data)
+
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: ERRORS,
+        payload: {
+          msg: err.response.statusText,
+          status: err.response.status,
+        },
+      });
+    }
+  };
 
 export const DeleteProfile = (id) =>dispatch=>{
     if (window.confirm("Are you certain you want to delete this profile?")){

@@ -19,7 +19,7 @@ function Coaches() {
   },[])
 
   return (
-    <div className="bg-light" style={{ height: "100vh" }}>
+    <div className="bg-light" style={{ height: "100vh" ,marginTop:"5%", marginRight:"5%", marginLeft:"5%", backgroundColor:"none" }}>
       <h3 style={{ display: "flex", justifyContent: "center" }}>All Coaches</h3>
       <div
         className="Card-Container"

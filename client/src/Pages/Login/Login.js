@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import Inputs from '../../Componentes/Inputs'
 import { LoginAction } from '../../redux/actions/authActions'
+import './Login.css'
 
 function Login() {
   const dispatch=useDispatch()
@@ -21,6 +22,7 @@ function Login() {
     dispatch (LoginAction(form,navigate))
   }
   return (
+    <div className='LoginContainer'>
     <Form onSubmit={onSubmit} style={{marginLeft: "20%" , marginRight:"20%"}}>
 
     <Inputs name="email" label="Email" type="text" onChangeHandler={onChangeHandler} errors={errors.email}/>
@@ -34,6 +36,7 @@ function Login() {
       Connect
     </Button>
   </Form>
+  </div>
   )
 }
 

@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { DeleteProfile } from '../redux/actions/profileActions';
+import {  getProfileById } from '../redux/actions/profileActions';
+import { Link } from 'react-router-dom';
 
 function CardsComponent({_id, user, phone , description}) {
     const dispatch= useDispatch()
-    const DeleteHandler = (id) => {
-      dispatch(DeleteProfile(id));
-    };
+
+
   return (
     <div className='Card' style={{margin:20,}}>
     <Card style={{ width: '18rem', display:"flex",  }}>
@@ -20,7 +20,9 @@ function CardsComponent({_id, user, phone , description}) {
       <Card.Text>
         {phone}
       </Card.Text>
-      <Button variant="primary">Visit Profile</Button>
+      <Link to="/visitprofile" >
+      <Button variant="primary" onClick={()=>dispatch(getProfileById(_id))}>Visit Profile</Button>
+      </Link>
     </Card.Body>
   </Card>
   </div>

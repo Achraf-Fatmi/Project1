@@ -62,10 +62,25 @@ const DeleteProfile = async (req, res)=>{
     res.status(404).json(error.message)
     }
 }
+const getProfileByID =async (req, res) => {
+    try {
+      const profile = await ProfileModel.findById(req.params.id).populate('user',["name","email", "role"]);
+
+      if (!profile) return res.status(404).json({ msg: 'profile not found' });
+
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      if (err.kind == 'ObjectId')
+        return res.status(404).json({ msg: 'profile not found' });
+      res.status(500).send('Server Error');
+    }
+  }
 
 module.exports={
     AddProfile,
     FindAllProfiles,
     FindOneProfile,
-    DeleteProfile
+    DeleteProfile,
+    getProfileByID
 }

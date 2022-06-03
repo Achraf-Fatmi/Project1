@@ -1,8 +1,9 @@
-import { DELETE_PROFILE, SET_PROFILE, SET_PROFILES } from "../types";
+import { DELETE_PROFILE, GET_PROFILE, SET_PROFILE, SET_PROFILES } from "../types";
 
 const initialState = {
     profiles : [],
-    profile: {}
+    profile: {},
+    visitedProfile:{}
 }
 
 export default function (state= initialState, action){
@@ -17,6 +18,12 @@ export default function (state= initialState, action){
           ...state,
           profiles: action.payload,
         };
+        case GET_PROFILE:
+          return {      
+            
+            ...state,
+            visitedProfile:action.payload
+          }
         case DELETE_PROFILE:
         return {
           ...state,
