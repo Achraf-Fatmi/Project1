@@ -7,6 +7,10 @@ function VisitProfile() {
     const profile = useSelector(state=> state.profiles.visitedProfile);
 
   console.log("myProfile",profile)
+  // useEffect((e)=>{
+  //   e.stopPropagation()
+  // },[profile])
+
   return (
     <section className="bg-light">
     <div className="container">
