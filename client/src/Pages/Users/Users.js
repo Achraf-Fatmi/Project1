@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CardsComponent from '../../Componentes/CardsComponent'
 import { GetProfiles } from '../../redux/actions/profileActions'
+import "./Users.css"
 
 function Users() {
   const dispatch= useDispatch()
@@ -19,7 +20,7 @@ function Users() {
   },[])
 
   return (
-    <div className="bg-light" style={{ height: "100vh" }}>
+    <div className="bg-dark" style={{ height: "100vh" ,marginTop:"5%", marginRight:"5%", marginLeft:"5%" ,borderRadius: "10px" }}>
       <h3 style={{ display: "flex", justifyContent: "center" }}>All Users</h3>
       <div
         className="Card-Container"
@@ -27,7 +28,7 @@ function Users() {
       >
         {profiles.profiles.map(({ _id, user, phone, description }) =>
           user.role === "USER" ? (
-            <CardsComponent
+            <CardsComponent 
               _id={_id}
               user={user}
               phone={phone}

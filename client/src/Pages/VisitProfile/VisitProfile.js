@@ -9,7 +9,7 @@ function VisitProfile() {
   console.log("myProfile",profile)
   // useEffect((e)=>{
   //   e.stopPropagation()
-  // },[profile])
+  // },[profile ]) 
 
   return (
     <section className="bg-light">

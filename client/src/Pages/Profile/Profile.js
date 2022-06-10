@@ -38,7 +38,7 @@ function Profile() {
           <div className="card">
             <div className="card-body">
               <div className="d-flex flex-column align-items-center text-center">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" className="rounded-circle p-1 bg-primary" width={110} />
+                <img src="https://www.kindpng.com/picc/m/269-2697881_computer-icons-user-clip-art-transparent-png-icon.png" alt="Admin" className="rounded-circle p-1 " width={110} />
                 <div className="mt-3">
                   <h4>{auth.user.name}</h4>
                   <p className="text-secondary mb-1">{auth.user.role}</p>

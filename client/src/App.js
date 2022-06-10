@@ -68,7 +68,7 @@ function App() {
       <div>
       <CompNavbar user={user}/>
     <Routes>
-          <Route path="/" element={<Home />}/>
+          <Route path="/" element={<Home user={user} />}/>
           <Route path="/users" element = {<Users />} />
           <Route path="/coaches" element = {<Coaches/>} />
           <Route path="/visitprofile" element={<VisitProfile/>}/>

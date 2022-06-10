@@ -9,9 +9,9 @@ function CardsComponent({_id, user, phone , description}) {
 
 
   return (
-    <div className='Card' style={{margin:20,}}>
+    <div className='carte' style={{margin:20,}}>
     <Card style={{ width: '18rem', display:"flex",  }}>
-    <Card.Img variant="top" src="holder.js/100px180" />
+    <Card.Img variant="top" src="https://www.kindpng.com/picc/m/269-2697881_computer-icons-user-clip-art-transparent-png-icon.png" style={{height: 200}} />
     <Card.Body >
       <Card.Title>{user.name}</Card.Title>
       <Card.Text>
