@@ -4,7 +4,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  useParams
+  
 } from "react-router-dom";
 
 import CompNavbar from './Componentes/NavbarComp';
