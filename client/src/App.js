@@ -49,7 +49,7 @@ function App() {
     role : auth.user.role
   }
   const profile=useSelector((state)=>state.profiles)
-   console.log(profile.profile)
+
 
 
 

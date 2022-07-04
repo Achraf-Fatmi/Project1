@@ -8,7 +8,6 @@ function Coaches() {
   const dispatch= useDispatch()
 
   const profiles = useSelector(state=> state.profiles)
-  console.log(profiles.profiles)
   
 
   useEffect (()=>{

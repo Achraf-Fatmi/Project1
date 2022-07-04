@@ -11,7 +11,7 @@ function Profile() {
   const errors = useSelector((state) => state.errors);
   const profiles = useSelector((state) => state.profiles.profile);
   const auth = useSelector ((state)=>state.auth)
-  console.log(auth)
+
 
   const onChangeHandler = (e) => {
     setForm({
